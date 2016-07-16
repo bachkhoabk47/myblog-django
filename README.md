@@ -1,1 +1,1 @@
-# myblog-django. :)1
+# myblog-django. :)
