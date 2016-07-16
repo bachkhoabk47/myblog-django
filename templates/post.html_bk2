@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load django_markdown %}
+{% load i18n %}
+
+{% block content %}
+  <div class="post">
+    <h2><a href="#">{{ object.title }}</a></h2>
+    <p class="meta">
+      {{ object.created }} |
+      Tagged under {{  object.tags.all|join:", " }}
+    </p>
+    {{ object.body|markdown }}
+  </div>
+{% endblock %}
