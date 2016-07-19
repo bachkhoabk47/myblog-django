@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
+import django
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -26,6 +28,16 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CACHED_STORAGE = False
+
+if CACHED_STORAGE:
+    DEFAULT_FILE_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+        'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
 
 # Application definition
 
@@ -39,7 +51,9 @@ INSTALLED_APPS = (
     'category',
     'blog',
     #'haystack',
-    'django_markdown',
+    #'django_markdown',
+    'ckeditor_uploader',
+    'ckeditor',
 )
 
 #HAYSTACK_CONNECTIONS = {
@@ -118,3 +132,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
+
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'ck_static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'ck_media')
+
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    },
+}

@@ -9,6 +9,9 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 
+from django.views import generic
+
+from . import forms
 
 def home(request):
     #queryset_list = Post.objects.active()
@@ -60,3 +63,24 @@ def post_detail(request, category_slug, post_slug):
 def contact(request):
     list_category = Category.objects.all()
     return render(request, 'contact.html', {'list_category':list_category})
+
+def about(request):
+    return render(request, 'about.html',)
+
+def htmlspecialchars(text):
+    return (
+        text.replace("&", "&amp;").
+        replace('"', "&quot;").
+        replace("<", "&lt;").
+        replace(">", "&gt;")
+    )
+
+
+class CkEditorFormView(generic.FormView):
+    form_class = forms.CkEditorForm
+    template_name = 'form.html'
+
+    def get_success_url(self):
+        return reverse('ckeditor-form')
+
+ckeditor_form_view = CkEditorFormView.as_view()

@@ -8,7 +8,8 @@ from django.utils.encoding import smart_str
 
 from django.utils.text import slugify
 
-
+from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor.fields import RichTextField
 
 class Tag(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
@@ -26,7 +27,7 @@ class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     title = models.CharField(max_length=255, unique=True)
     description = models.CharField(max_length=255, unique=True)
-    body = models.TextField()
+    body = RichTextUploadingField()
     slug = models.SlugField(max_length=255, unique=True)
     publish = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
