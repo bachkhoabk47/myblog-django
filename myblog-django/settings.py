@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'category',
     'blog',
+    'about',
     #'haystack',
     #'django_markdown',
     'ckeditor_uploader',

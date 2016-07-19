@@ -4,6 +4,8 @@ from django.db.models import Q
 from . import models
 from models import Post
 from category.models import Category
+from about.models import About
+
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
@@ -65,7 +67,9 @@ def contact(request):
     return render(request, 'contact.html', {'list_category':list_category})
 
 def about(request):
-    return render(request, 'about.html',)
+    list_about = About.objects.all()
+    return render(request, 'about.html', {'list_about': list_about})
+
 
 def htmlspecialchars(text):
     return (

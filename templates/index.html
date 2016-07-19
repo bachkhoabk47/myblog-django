@@ -50,10 +50,12 @@
     <!-- ###########################################################################################
     ################################## Finish the area for slideshow ############################-->
 
+  <hr>
+
 	{% for object in list_article %}
                 <!-- First Blog Post -->
                 <h2>
-                    <a href="#">{{ object.title }}</a>
+                    <a href="{% url "posts:detail" category_slug=object.category.slug post_slug=object.slug %}">{{ object.title }}</a>
                 </h2>
 
                 <!--<p class="lead">

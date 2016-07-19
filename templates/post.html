@@ -13,25 +13,19 @@
 
                     <!-- Blog Post -->
                     <!-- Title -->
-                    <h1>{{ post.title }}</h1>
+                    <h1 align="center">{{ post.title }}</h1>
 
                     <!-- Author -->
-                    <p class="lead">
-                        by <a href="#">Admin</a>
-                    </p>
+                        By <a href="#">{{ user.get_full_name}}</a> || <span class="glyphicon glyphicon-time"></span> Posted on {{ post.created }}
 
                     <hr>
 
                     <!-- Date/Time -->
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.created }}</p>
-
-                    <hr>
-
                     <!-- Preview Image 
                     <img class="img-responsive" src="http://placehold.it/900x300" alt=""> -->
-                    <hr>
-                    <!-- Post Content -->
-                    <p class="lead">{{ post.description }}</p>
+    
+                    <!-- Post Content 
+                    <p class="lead">{{ post.description }}</p> -->
                     <p>
                         {% autoescape on %}
                             {{ post.body |safe }}

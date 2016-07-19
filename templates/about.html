@@ -3,6 +3,12 @@
 
 {% block content %}
 
-<h1 align="center"> Tiểu sử bản thân </h1>
+{% for about in list_about %}
+`	<h1 align="center"> 
+		{% autoescape on %}
+			{{ about.body |safe }} 
+		{% endautoescape %}
+	</h1>
+{% endfor %}
 
 {% endblock %}
