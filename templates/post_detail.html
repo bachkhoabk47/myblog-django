@@ -16,7 +16,7 @@
                     <h1 align="center">{{ post.title }}</h1>
 
                     <!-- Author -->
-                        By <a href="#">{{ user.get_full_name}}</a> || <span class="glyphicon glyphicon-time"></span> Posted on {{ post.created }}
+                        <span class="glyphicon glyphicon-time"></span> Posted on {{ post.created }} || By <a href="#">{{ user.get_full_name}}</a> || Category = <a href="#">{{post.category.name}}</a>
 
                     <hr>
 

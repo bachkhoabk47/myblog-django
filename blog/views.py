@@ -60,7 +60,7 @@ def post_detail(request, category_slug, post_slug):
    list_category = Category.objects.all()
    #post = Post.objects.get(pk=post_id)
    #category = Category.objects.get(pk=category_id)
-   return render(request, 'post.html', {'post': post, 'list_category':list_category})
+   return render(request, 'post_detail.html', {'post': post, 'list_category':list_category})
 
 def contact(request):
     list_category = Category.objects.all()

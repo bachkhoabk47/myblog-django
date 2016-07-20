@@ -54,6 +54,8 @@
 
 	{% for object in list_article %}
                 <!-- First Blog Post -->
+        {% if object.publish %}
+        {% endif %}
                 <h2>
                     <a href="{% url "posts:detail" category_slug=object.category.slug post_slug=object.slug %}">{{ object.title }}</a>
                 </h2>
@@ -62,9 +64,9 @@
                     by <a href=""></a>
                 </p> -->
                 <p><span class="glyphicon glyphicon-time"></span>
-			     Posted on {{ object.created }} || by 
+			     Posted on {{ object.created }} || By 
                  
-                <a href="">{{ object.user.get_full_name}}</a>
+                <a href="">{{ object.user.get_full_name}}</a> || Category = <a href="#">{{ object.category.name }}</a>
 
 		        </p>
                 <hr>

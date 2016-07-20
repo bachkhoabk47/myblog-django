@@ -46,6 +46,7 @@ class Post(models.Model):
         verbose_name = "Blog Entry"
         verbose_name_plural = "Blog Entries"
         ordering = ["-created"]
+        
 
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)
