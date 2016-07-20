@@ -16,7 +16,8 @@ from . import forms
 
 def home(request):
     #queryset_list = Post.objects.active()
-    list_article = Post.objects.all()
+    #list_article = Post.objects.all()
+    list_article = Post.objects.filter(publish=True)
     query = request.GET.get("q")
     if query:
       list_article = list_article.filter(
@@ -24,13 +25,18 @@ def home(request):
         Q(body__icontains=query)
         ).distinct()
 
+    #for article in list_article:
+    #    if article.publish:
+    #        list_article = Post.objects.filter(publish__icontains=article.publish)
+
+
+
     category = request.GET.get('category')
     print category
 
     if category:
       list_article = list_article.filter(category__slug__icontains=category)
 
-    #list_article = Post.objects.all()
     paginator = Paginator(list_article, 2) # Show 25 contacts per pagepaginator = Paginator(contact_list, 25) # Show 25 contacts per page
     list_category = Category.objects.all()
 

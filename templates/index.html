@@ -54,8 +54,7 @@
 
 	{% for object in list_article %}
                 <!-- First Blog Post -->
-        {% if object.publish %}
-        {% endif %}
+
                 <h2>
                     <a href="{% url "posts:detail" category_slug=object.category.slug post_slug=object.slug %}">{{ object.title }}</a>
                 </h2>
