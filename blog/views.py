@@ -3,9 +3,8 @@ from django.shortcuts import render
 from django.db.models import Q
 from . import models
 from models import Post
-from category.models import Category
 from about.models import About
-
+from category.models import Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
@@ -55,7 +54,8 @@ def home(request):
 
 def post_detail(request, category_slug, post_slug):
    #category = get_object_or_404(Category, id = category_id)
-   category = get_object_or_404(Category, slug = category_slug)
+   #category = get_object_or_404(Category, slug = category_slug)
+   Category.objects.filter(slug=category_slug)
    post = get_object_or_404(Post, slug = post_slug)
    list_category = Category.objects.all()
    #post = Post.objects.get(pk=post_id)
@@ -67,9 +67,9 @@ def contact(request):
     return render(request, 'contact.html', {'list_category':list_category})
 
 def about(request):
+    list_category = Category.objects.all()
     list_about = About.objects.all()
-    return render(request, 'about.html', {'list_about': list_about})
-
+    return render(request, 'about.html', {'list_about': list_about, 'list_category':list_category})
 
 def htmlspecialchars(text):
     return (

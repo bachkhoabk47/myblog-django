@@ -4,11 +4,9 @@
 {% block content %}
 
 {% for about in list_about %}
-`	<h1 align="center"> 
 		{% autoescape on %}
 			{{ about.body |safe }} 
 		{% endautoescape %}
-	</h1>
 {% endfor %}
 
 {% endblock %}
