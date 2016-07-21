@@ -13,7 +13,6 @@ from ckeditor.fields import RichTextField
 
 class Tag(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
-
     def __str__(self):
         return self.slug
 

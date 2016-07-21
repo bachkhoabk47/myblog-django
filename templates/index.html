@@ -3,12 +3,6 @@
 
 {% block content %}
 
-	<!--<h1 class="page-header">
-            Power is guided by share knowledge!
-            <small>Secondary Text</small> 
-        </h1> 
-    <img src="http://placehold.it/900x300" class="img-responsive" alt="Responsive image"> -->
-
     <!-- ###########################################################################################
     ################################## Start the area for slideshow ############################-->
 
@@ -52,30 +46,23 @@
 
   <hr>
 
+<!-- #################################################################################### -->
 	{% for object in list_article %}
                 <!-- First Blog Post -->
+    <h2>
+      <a href="{% url "posts:detail" category_slug=object.category.slug post_slug=object.slug %}">{{ object.title }}</a>
+    </h2>
 
-                <h2>
-                    <a href="{% url "posts:detail" category_slug=object.category.slug post_slug=object.slug %}">{{ object.title }}</a>
-                </h2>
-
-                <!--<p class="lead">
-                    by <a href=""></a>
-                </p> -->
-                <p><span class="glyphicon glyphicon-time"></span>
-			     Posted on {{ object.created }} || By 
-                 
-                <a href="">{{ object.user.get_full_name}}</a> || Category = <a href="#">{{ object.category.name }}</a>
-
-		        </p>
-                <hr>
-                <!-- <img class="img-responsive" src="http://placehold.it/900x300" alt=""> 
-                <hr> -->
-                <p> {{ object.description }} </p>
-                <a class="btn btn-primary" href="{% url "posts:detail" category_slug=object.category.slug post_slug=object.slug %}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-                <hr>
+    <p><span class="glyphicon glyphicon-time"></span>
+			Posted on {{ object.created }} || By 
+      <a href="">{{ object.user.get_full_name}}</a> || Category = <a href="#">{{ object.category.name }}</a>
+    </p>
+    <hr>
+    <p> {{ object.description }} </p>
+    <a class="btn btn-primary" href="{% url "posts:detail" category_slug=object.category.slug post_slug=object.slug %}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 	{% endfor %}
+
+<!-- #################################################################################### -->
 
  <!-- Pager -->
 		{% for article in list_article %}
@@ -83,20 +70,19 @@
 		    {{ article.full_name|upper }}<br />
 		{% endfor %}
 
-                <ul class="pager">
-                    <li class="previous">
-			{% if list_article.has_previous %}
-			    <a href="?page={{ list_article.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
-			{% endif %}	
-                    </li>
+    <ul class="pager">
+        <li class="previous">
+		       {% if list_article.has_previous %}
+			       <a href="?page={{ list_article.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+			     {% endif %}	
+        </li>
 		
 		    Page {{ list_article.number }} of {{ list_article.paginator.num_pages }}.
 
-                    <li class="next">
-			{% if list_article.has_next %}
-			    <a href="?page={{ list_article.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
-			{% endif %}
-                    </li>
+        <li class="next">
+			     {% if list_article.has_next %}
+			       <a href="?page={{ list_article.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+			     {% endif %}
+        </li>
 		</ul>
-
 {% endblock %}

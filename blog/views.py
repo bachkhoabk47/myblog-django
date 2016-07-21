@@ -16,8 +16,9 @@ from . import forms
 
 def home(request):
     #queryset_list = Post.objects.active()
-    #list_article = Post.objects.all()
+    list_recent_article = Post.objects.all()[:5]
     list_article = Post.objects.filter(publish=True)
+
     query = request.GET.get("q")
     if query:
       list_article = list_article.filter(
@@ -56,26 +57,29 @@ def home(request):
     def previous_page_number(self):
         return self.paginator.validate_number(self.number - 1)
 
-    return render(request, "index.html",{"list_article":list_article, "list_category":list_category})
+    return render(request, "index.html",{"list_article":list_article, "list_recent_article":list_recent_article,"list_category":list_category})
 
 def post_detail(request, category_slug, post_slug):
    #category = get_object_or_404(Category, id = category_id)
    #category = get_object_or_404(Category, slug = category_slug)
+   list_recent_article = Post.objects.all()[:5]
    Category.objects.filter(slug=category_slug)
    post = get_object_or_404(Post, slug = post_slug)
    list_category = Category.objects.all()
    #post = Post.objects.get(pk=post_id)
    #category = Category.objects.get(pk=category_id)
-   return render(request, 'post_detail.html', {'post': post, 'list_category':list_category})
+   return render(request, 'post_detail.html', {'post': post, "list_recent_article":list_recent_article, 'list_category':list_category})
 
 def contact(request):
     list_category = Category.objects.all()
-    return render(request, 'contact.html', {'list_category':list_category})
+    list_recent_article = Post.objects.all()[:5]
+    return render(request, 'contact.html', {"list_recent_article":list_recent_article, 'list_category':list_category})
 
 def about(request):
+    list_recent_article = Post.objects.all()[:5]
     list_category = Category.objects.all()
     list_about = About.objects.all()
-    return render(request, 'about.html', {'list_about': list_about, 'list_category':list_category})
+    return render(request, 'about.html', {'list_about': list_about,"list_recent_article":list_recent_article, 'list_category':list_category})
 
 def htmlspecialchars(text):
     return (

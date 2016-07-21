@@ -9,6 +9,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ("title", "created", "modified")
     list_filter = ('created', 'publish',)
     date_hierarchy = 'created'
+    prepopulated_fields = {"slug": ("title",)}
 
 admin.site.register(models.Post, PostAdmin)
 admin.site.register(models.Tag)
