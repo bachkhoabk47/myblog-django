@@ -4,7 +4,7 @@ from django.db.models import TextField
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ("title", "category", "created", "modified", "publish")
+    list_display = ("title", "category", "created", "modified", "publish", "id")
     list_editable = ('publish', )
     search_fields = ("title", "created", "modified")
     list_filter = ('created', 'publish',)
