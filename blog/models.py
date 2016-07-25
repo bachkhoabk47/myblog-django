@@ -23,6 +23,7 @@ class EntryQuerySet(models.QuerySet):
 
 
 class Post(models.Model):
+    id_sort = models.IntegerField(default=0)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     title = models.CharField(max_length=255, unique=True)
     description = models.CharField(max_length=255, unique=True)
@@ -44,8 +45,16 @@ class Post(models.Model):
     class Meta:
         verbose_name = "Blog Entry"
         verbose_name_plural = "Blog Entries"
-        ordering = ["-created"]
+        ordering = ["-id_sort"]
         
+class Album(models.Model):
+    title = models.CharField(max_length=255, unique=True)
+    publish = models.BooleanField(default=True)
+    body = RichTextUploadingField()
+    slug = models.SlugField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.title.encode('utf8')
 
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)

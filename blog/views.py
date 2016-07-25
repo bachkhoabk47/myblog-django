@@ -15,7 +15,7 @@ from django.views import generic
 from . import forms
 
 def home(request):
-    list_recent_article = Post.objects.all()[:5]
+    list_recent_article = Post.objects.all().order_by('-created')[:5]
     list_article = Post.objects.filter(publish=True)
     list_category = Category.objects.all()
     category = request.GET.get('category')
@@ -90,6 +90,9 @@ def about(request):
     list_category = Category.objects.all()
     list_about = About.objects.all()
     return render(request, 'about.html', {'list_about': list_about,"list_recent_article":list_recent_article, 'list_category':list_category})
+
+def album(request):
+    return render(request, 'album.html')
 
 def htmlspecialchars(text):
     return (
