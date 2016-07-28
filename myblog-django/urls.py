@@ -6,7 +6,6 @@ from django.contrib.staticfiles import views
 urlpatterns = patterns(
     '',
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^markdown/', include("django_markdown.urls")),
     url(r'^static/(?P<path>.*)$', views.serve),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {

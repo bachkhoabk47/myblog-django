@@ -8,7 +8,10 @@ https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/
 """
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "qblog.settings")
+import sys
+
+sys.path.append('/var/www/myblog-django')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myblog-django.settings")
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
