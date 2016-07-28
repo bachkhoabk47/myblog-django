@@ -51,8 +51,6 @@ INSTALLED_APPS = (
     'category',
     'blog',
     'about',
-    #'haystack',
-    #'django_markdown',
     'ckeditor_uploader',
     'ckeditor',
 )
