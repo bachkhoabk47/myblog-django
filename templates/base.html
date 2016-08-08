@@ -10,7 +10,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Post - Start Bootstrap Template</title>
+
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    
+    {% block title_share %}{% endblock %}
+    <!-- <meta property="og:type"  content="website" /> 
+    <meta property="og:title" content="Blog Post - Start to Share" /> -->
 
     <!-- Bootstrap Core CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">

@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% block title_share %}
+    {% for object in list_article %}
+        <title>{{ object.category.name }}</title>
+    {% endfor %}
+
+{% endblock %}
+
+
 {% block content %}
 
   <hr>
