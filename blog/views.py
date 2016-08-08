@@ -16,6 +16,7 @@ from . import forms
 
 def home(request):
     list_recent_article = Post.objects.all().order_by('-created')[:5]
+    list_home_article = Post.objects.filter(publish=True)
     list_article = Post.objects.filter(publish=True)
     list_category = Category.objects.all()
     category = request.GET.get('category')
@@ -71,7 +72,25 @@ def home(request):
             return self.paginator.validate_number(self.number - 1)
         return render(request, "posts_in_category.html", {"list_article":list_article, "list_recent_article":list_recent_article, "list_category":list_category})
     
-    return render(request, "home.html", {"list_article":list_article , "list_recent_article":list_recent_article, "list_category":list_category})
+
+    paginator = Paginator(list_home_article, 4) # Show 25 contacts per pagepaginator = Paginator(contact_list, 25) # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        list_home_article = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        list_home_article = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        list_home_article = paginator.page(paginator.num_pages)
+
+    def next_page_number(self):
+        return self.paginator.validate_number(self.number + 1)
+
+    def previous_page_number(self):
+        return self.paginator.validate_number(self.number - 1)
+
+    return render(request, "home.html", {"list_article":list_article , "list_home_article":list_home_article, "list_recent_article":list_recent_article, "list_category":list_category})
 
 def post_detail(request, category_slug, post_slug):
    #list_recent_article = Post.objects.all()[:5]

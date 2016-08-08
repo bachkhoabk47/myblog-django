@@ -56,7 +56,7 @@
 <!--    <h1 class="page-header">
                     Page Heading
                 </h1> -->
- {% for article in list_article %}
+ {% for article in list_home_article %}
                 <!-- First Blog Post -->
                 <h2>
                     <a href="{% url "posts:detail" category_slug=article.category.slug post_slug=article.slug %}">{{ article.title }}</a>
@@ -72,15 +72,30 @@
 
                 <hr>
 {% endfor %}
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
-</ul>
+
+ <!-- Pager -->
+                {% for article in list_home_article %}
+                    {# Each "contact" is a Contact model object. #}
+                    {{ article.full_name|upper }}
+                {% endfor %}
+
+    <ul class="pager">
+        <li class="previous">
+                       {% if list_home_article.has_previous %}
+                               <a href="?page={{ list_home_article.previous_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                             {% endif %}
+        </li>
+                    {% if request.GET.category %}
+                      Page {{ list_home_article.number }} of {{ list_home_article.paginator.num_pages }}.
+        {% endif %}
+
+        <li class="next">
+                             {% if list_home_article.has_next %}
+                               <a href="?page={{ list_home_article.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                             {% endif %}
+        </li>
+    </ul>
+
 {% endblock %}
 <!-- ########################################################################################################## -->
 
