@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% block title_share %}
+    {% if post.title %}
+        <title>{{ post.title }}</title>
+    {% endif %}
+    <meta property="og:title" content="{{ post.title }}" />
+{% endblock %}
+
 {% block content %}
  
     <!-- Page Content -->
@@ -53,7 +60,6 @@
 
   ga('create', 'UA-81288919-1', 'auto');
   ga('send', 'pageview');
-
 </script>
 
 {% endblock %}

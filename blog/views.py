@@ -74,7 +74,8 @@ def home(request):
     return render(request, "home.html", {"list_recent_article":list_recent_article, "list_category":list_category})
 
 def post_detail(request, category_slug, post_slug):
-   list_recent_article = Post.objects.all()[:5]
+   #list_recent_article = Post.objects.all()[:5]
+   list_recent_article = Post.objects.all().order_by('-created')[:5]
    Category.objects.filter(slug=category_slug)
    post = get_object_or_404(Post, slug = post_slug)
    list_category = Category.objects.all()
@@ -82,11 +83,13 @@ def post_detail(request, category_slug, post_slug):
 
 def contact(request):
     list_category = Category.objects.all()
-    list_recent_article = Post.objects.all()[:5]
+    list_recent_article = Post.objects.all().order_by('-created')[:5]
+    #list_recent_article = Post.objects.all()[:5]
     return render(request, 'contact.html', {"list_recent_article":list_recent_article, 'list_category':list_category})
 
 def about(request):
-    list_recent_article = Post.objects.all()[:5]
+    #list_recent_article = Post.objects.all()[:5]
+    list_recent_article = Post.objects.all().order_by('-created')[:5]
     list_category = Category.objects.all()
     list_about = About.objects.all()
     return render(request, 'about.html', {'list_about': list_about,"list_recent_article":list_recent_article, 'list_category':list_category})
