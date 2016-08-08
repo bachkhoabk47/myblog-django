@@ -71,7 +71,7 @@ def home(request):
             return self.paginator.validate_number(self.number - 1)
         return render(request, "posts_in_category.html", {"list_article":list_article, "list_recent_article":list_recent_article, "list_category":list_category})
     
-    return render(request, "home.html", {"list_recent_article":list_recent_article, "list_category":list_category})
+    return render(request, "home.html", {"list_article":list_article , "list_recent_article":list_recent_article, "list_category":list_category})
 
 def post_detail(request, category_slug, post_slug):
    #list_recent_article = Post.objects.all()[:5]

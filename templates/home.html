@@ -5,7 +5,7 @@
     <title>Blog Post - Start to Share</title>
 {% endblock %}
 
-{% block content %}
+{% block slide %}
 
     <!-- ###########################################################################################
     ################################## Start the area for slideshow ############################-->
@@ -47,6 +47,43 @@
 
     <!-- ###########################################################################################
     ################################## Finish the area for slideshow ############################-->
+{% endblock %}
+
+<!-- ###############################################################################################################
+############################################################################################################### -->
+
+{% block content %}
+<!--    <h1 class="page-header">
+                    Page Heading
+                </h1> -->
+ {% for article in list_article %}
+                <!-- First Blog Post -->
+                <h2>
+                    <a href="{% url "posts:detail" category_slug=article.category.slug post_slug=article.slug %}">{{ article.title }}</a>
+                </h2>
+		<p><span class="glyphicon glyphicon-time"></span>
+                        Posted on {{ article.created }} || By
+		      <a href="">{{ article.user.get_full_name}}</a> || Category = <a href="#">{{ article.category.name }}</a>
+	        </p>
+
+                <hr>
+                <p>{{ article.description }}</p>
+                <a class="btn btn-primary" href="{% url "posts:detail" category_slug=article.category.slug post_slug=article.slug %}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                <hr>
+{% endfor %}
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="previous">
+                        <a href="#">&larr; Older</a>
+                    </li>
+                    <li class="next">
+                        <a href="#">Newer &rarr;</a>
+                    </li>
+</ul>
+{% endblock %}
+<!-- ########################################################################################################## -->
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -58,5 +95,3 @@
   ga('send', 'pageview');
 
 </script>
-
-{% endblock %}

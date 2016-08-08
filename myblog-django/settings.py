@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'blog',
     'about',
     'ckeditor_uploader',
+    'responsive_images',
     'ckeditor',
 )
 
