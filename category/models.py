@@ -8,5 +8,5 @@ class Category(models.Model):
     slug = models.SlugField(blank=False, max_length=255, default="docker")
 
     def __str__(self):
-	return self.name
+        return (self.name)
 

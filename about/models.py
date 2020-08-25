@@ -9,4 +9,4 @@ class About(models.Model):
     body = RichTextUploadingField()
     
     def __str__(self):
-	return self.title.encode('utf8')
+        return str(self.title.encode('utf8'))

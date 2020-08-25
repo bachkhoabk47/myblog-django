@@ -1,5 +1,6 @@
 from django.conf import settings
-from django.core.urlresolvers import reverse
+#from django.core.urlresolvers import reverse
+from django.urls import reverse
 from category.models import Category
 
 from django.db import models
@@ -14,17 +15,17 @@ from ckeditor.fields import RichTextField
 class Tag(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     def __str__(self):
-        return self.slug
+        return str(self.slug)
 
 
 class EntryQuerySet(models.QuerySet):
     def published(self):
-        return self.filter(publish=True)
+        return str(self.filter(publish=True))
 
 
 class Post(models.Model):
     id_sort = models.IntegerField(default=0)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     title = models.CharField(max_length=255, unique=True)
     description = models.CharField(max_length=255, unique=True)
     body = RichTextUploadingField()
@@ -33,14 +34,14 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     tags = models.ManyToManyField(Tag)
-    category = models.ForeignKey(Category, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     objects = EntryQuerySet.as_manager()
 
     def __str__(self):
-        return self.title.encode('utf8')
+        return str(self.title.encode('utf8'))
 
     def get_absolute_url(self):
-        return reverse("posts:detail", kwargs={"slug": self.slug})
+        return str(reverse("posts:detail", kwargs={"slug": self.slug}))
 
     class Meta:
         verbose_name = "Blog Entry"
@@ -54,7 +55,7 @@ class Album(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
 
     def __str__(self):
-        return self.title.encode('utf8')
+        return str(self.title.encode('utf8'))
 
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)
@@ -64,8 +65,8 @@ def create_slug(instance, new_slug=None):
     exists = qs.exists()
     if exists:
         new_slug = "%s-%s" %(slug,qs.first().id)
-        return create_slug(instance, new_slug=new_slug)
-    return slug
+        return str(create_slug(instance, new_slug=new_slug))
+    return str(slug)
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
