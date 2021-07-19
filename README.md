@@ -1,1 +1,1 @@
-# myblog-django. :)
+# pi-hackathon
